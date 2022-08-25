@@ -16,15 +16,15 @@
             <!-- <div class="ancient-card " style="background-image: url(./assets/Ancients/ShubNiggurath.png)"></div>
             <div class="ancient-card " style="background-image: url(./assets/Ancients/IogSothoth.png)"></div>
             <div class="ancient-card " style="background-image: url(./assets/Ancients/Azathoth.png)"></div> -->
-            <div class="ancient-card active" style="background-image: url(./assets/Ancients/Cthulthu.png) "></div>
+            <div class="ancient-card" style="background-image: url(./assets/Ancients/Cthulthu.png) "></div>
         </div>
         <div class="difficulty-container">
             <!-- <div class="difficulty active">Низкая</div> -->
-            <div class="difficulty active">Средняя</div>
+            <div class="difficulty active hidden">Средняя</div>
             <!-- <div class="difficulty ">Высокая</div> -->
         </div>
         <div class="deck-container">
-            <div class="current-state">
+            <div class="current-state" style="display: none;">
                 <div class="stage-container">
                     <span class="stage-text done">Первая стадия</span>
                     <div class="dots-container">
@@ -50,8 +50,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="deck" style="background-image: url(./assets/mythicCardBackground.png)"></div>
-                <div class="last-card" style="background-image: url(./assets/MythicCards/blue/blue1.png)"></div>
+                <span class="shuffle-button hidden">Замешать колоду</span>
+                <div class="deck hidden" style="background-image: url(./assets/mythicCardBackground.png)"></div>
+                <div class="last-card"></div>
             </div>
         </div>
     </div>
