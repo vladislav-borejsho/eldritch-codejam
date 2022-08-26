@@ -30,6 +30,7 @@ code {
     background-size: contain;
     box-sizing: border-box;
     cursor: pointer;
+    border-radius: 10px;
     height: 260px;
     width: 200px
 }
@@ -46,13 +47,27 @@ code {
     justify-content: center
 }
 
+.start-again {
+    text-align: center;
+    height: 10%;
+    margin: auto;
+    color: #fff;
+    border: 2px solid rgb(201, 15, 15);
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: rgba(102, 51, 153, 0.6);
+}
+
 .difficulty-container .difficulty {
     border: 2px solid purple;
     box-sizing: border-box;
     color: purple;
     cursor: pointer;
     padding: 5px;
-    text-align: center
+    border-radius: 10px;
+    text-align: center;
 }
 
 .difficulty-container .difficulty.active {
@@ -72,6 +87,7 @@ code {
     background-color: red;
     border: 2px solid purple;
     color: purple;
+    border-radius: 10px;
     cursor: pointer;
     padding: 5px
 }

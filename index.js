@@ -9,6 +9,8 @@ const deck = document.querySelector('.deck')
 const lastCard = document.querySelector('.last-card')
 const brownDot = document.querySelector('.brown')
 const blueDot = document.querySelector('.blue')
+const currState = document.querySelector('.current-state')
+const startAgain = document.querySelector('.start-again')
 
 const numbers = []
 const greenCards = []
@@ -20,10 +22,17 @@ const stage3 = []
 
 let clicksNum = 0
 
-ancients.addEventListener('click', activeCard)
+startAgain.addEventListener('click',reload)
+function reload() {
+    window.location.reload()
+}
 
-function activeCard() {
+ancients.addEventListener('click', startGame)
+
+function startGame() {
     ancients.classList.add('active')
+    currState.style.display = 'block'
+    numbers.length = 0;
     if (ancients.classList.contains('active')) {
     difficulty.classList.remove('hidden')
     difficulty.addEventListener('click', activeDiffic)
@@ -39,7 +48,6 @@ function activeDiffic() {
 
 function activeShuffle() {
     deck.classList.remove('hidden')
-    shuffleBtn.addEventListener('click', hiddenBtn)
     deckClick()
 }
 
@@ -58,7 +66,7 @@ function deckClick() {
         if (clicksNum > 0 && clicksNum < 5) {setDeckCard()}
         else if (clicksNum > 4 && clicksNum < 9) {setDeckCard()}
         else if (clicksNum > 8 && clicksNum < 16) {setDeckCard()}
-        else if (clicksNum > 15) {deck.style.display = 'none', difficulty.style.display = 'none', ancients.classList.remove('active')}
+        else if (clicksNum > 15) {startAgain.style.display = 'block';currState.style.display = 'none';deck.classList.add('hidden'), difficulty.classList.add('hidden'), ancients.classList.remove('active')}
     })
 }
                 // Отбираем рандомно нужное количество карт по цветам //
@@ -90,8 +98,6 @@ for (let i=1; i<4; i++) {
 }
 for (let i=1; i<2; i++) {
     stage3.push(brownCards.pop())
-    numbers.length = 0;
-    console.log(numbers);
 }
 
                     // Достаём карту из колоды по стадиям //
