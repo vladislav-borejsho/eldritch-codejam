@@ -1,16 +1,27 @@
 import greenCardsData from "./data/mythicCards/green/greenIndex.js"
 import blueCardsData from "./data/mythicCards/blue/blueIndex.js"
 import brownCardsData from "./data/mythicCards/brown/brownIndex.js"
+import ancientsData from "./data/ancients.js"
 
 const ancients = document.querySelector('.ancient-card')
 const difficulty = document.querySelector('.difficulty')
 const shuffleBtn = document.querySelector('.shuffle-button')
 const deck = document.querySelector('.deck')
 const lastCard = document.querySelector('.last-card')
-const brownDot = document.querySelector('.brown')
-const blueDot = document.querySelector('.blue')
+const brownDot1 = document.querySelector('.brown1')
+const blueDot1 = document.querySelector('.blue1')
+const greenDot1 = document.querySelector('.green1')
+const brownDot2 = document.querySelector('.brown2')
+const blueDot2 = document.querySelector('.blue2')
+const greenDot2 = document.querySelector('.green2')
+const brownDot3 = document.querySelector('.brown3')
+const blueDot3 = document.querySelector('.blue3')
+const greenDot3 = document.querySelector('.green3')
 const currState = document.querySelector('.current-state')
 const startAgain = document.querySelector('.start-again')
+const stageText1 = document.querySelector('.stage-text1')
+const stageText2 = document.querySelector('.stage-text2')
+const stageText3 = document.querySelector('.stage-text3')
 
 const numbers = []
 const greenCards = []
@@ -20,6 +31,7 @@ const stage1 = []
 const stage2 = []
 const stage3 = []
 
+let colorOfCurrentCard = ''
 let clicksNum = 0
 
 startAgain.addEventListener('click',reload)
@@ -31,7 +43,6 @@ ancients.addEventListener('click', startGame)
 
 function startGame() {
     ancients.classList.add('active')
-    currState.style.display = 'block'
     numbers.length = 0;
     if (ancients.classList.contains('active')) {
     difficulty.classList.remove('hidden')
@@ -56,6 +67,8 @@ shuffleBtn.addEventListener('click', hiddenBtn)
 function hiddenBtn() {
     if (shuffleBtn.classList != 'hidden') {
         shuffleBtn.classList.add('hidden')
+        currState.style.display = 'block';
+        setScore()
     }
 }
                     // Счётчик нажатий на колоду //
@@ -105,17 +118,62 @@ function setDeckCard() {
     randomShuffle(stage1)
     randomShuffle(stage2)
     randomShuffle(stage3)
-    const img = new Image();
-    if (clicksNum > 0 && clicksNum < 5) {img.src = stage1.pop().cardFace;}
-    else if (clicksNum > 4 && clicksNum < 9) {img.src = stage2.pop().cardFace;}
-    else if (clicksNum > 8 && clicksNum < 16) {img.src = stage3.pop().cardFace;}
+    const img = new Image();            
+    if (clicksNum > 0 && clicksNum < 5) {
+
+            // Подсчитываем оставшиеся карты в стадиях //
+        colorOfCurrentCard=stage1[stage1.length-1].color; 
+        if (colorOfCurrentCard === 'brown') {
+            brownDot1.textContent --
+        } else if (colorOfCurrentCard === 'blue') {
+            blueDot1.textContent --
+        } else {
+            greenDot1.textContent --
+        }
+        if (clicksNum === 4) {
+            stageText1.classList.add('done');
+        }
+                                //
+        img.src = stage1.pop().cardFace;}
+    else if (clicksNum > 4 && clicksNum < 9) {
+
+        // Подсчитываем оставшиеся карты в стадиях //
+        colorOfCurrentCard=stage2[stage2.length-1].color;
+        if (colorOfCurrentCard === 'brown') {
+            brownDot2.textContent --
+        } else if (colorOfCurrentCard === 'blue') {
+            blueDot2.textContent --
+        } else {
+            greenDot2.textContent --
+        }
+        if (clicksNum === 8) {
+            stageText2.classList.add('done');
+        }
+                            //
+        img.src = stage2.pop().cardFace;}
+    else if (clicksNum > 8 && clicksNum < 16) {
+
+               // Подсчитываем оставшиеся карты в стадиях //
+        colorOfCurrentCard=stage3[stage3.length-1].color;
+        if (colorOfCurrentCard === 'brown') {
+            brownDot3.textContent --
+        } else if (colorOfCurrentCard === 'blue') {
+            blueDot3.textContent --
+        } else {
+            greenDot3.textContent --
+        }
+        if (clicksNum === 15) {
+            stageText3.classList.add('done');
+        }
+                            //
+        img.src = stage3.pop().cardFace;}
    
     console.log(img.src);
         img.onload = () => {
         lastCard.style.backgroundImage = `url(${img.src})`;
         }
 }
-                        // Выбираем рандомное число без повтора //
+                    // Выбираем рандомное число без повтора //
 function getRandomNum(min, max) {
   const number = Math.floor(min + Math.random() * (max - min))
   if (numbers.includes(number)) return getRandomNum(min, max)
@@ -130,99 +188,17 @@ function randomShuffle(arr) {
     return arr.map(i=>[Math.random(),i]).sort().map(i=>i[1]);
 }
 
-console.log('карты 1 стадии: ',stage1);
-console.log('перемешанные карты 1 стадии: ',randomShuffle(stage1));
-console.log('карты 2 стадии: ',stage2);
-console.log('перемешанные карты 2 стадии: ',randomShuffle(stage2));
-console.log('карты 3 стадии: ',stage3);
-console.log('перемешанные карты 3 стадии: ',randomShuffle(stage3));
- // if (clicksNum > 0 && clicksNum < 3) {firstDeckBrown()}
-        // else if (clicksNum > 2 && clicksNum < 5) {firstDeckBlue()}
-        // else if (clicksNum > 4 && clicksNum < 6) {secondDeckGreen()}
-        // else if (clicksNum > 5 && clicksNum < 9) {secondDeckBrown()}
-        // else if (clicksNum > 8 && clicksNum < 12) {thirdDeckGreen()}
-        // else if (clicksNum > 11 && clicksNum < 16) {thirdDeckBrown()}
-
-// function firstDeckCard() {
-//     const img = new Image();
-//     img.src = `./assets/MythicCards/brown/brown${brownCardsNum[clicksNum-1]}.png`;
-//     img.onload = () => {
-//     lastCard.style.backgroundImage = `url(${img.src})`;
-//     }
-// }
-
-// function firstDeckBrown() {
-//     const img = new Image();
-//         img.src = `./assets/MythicCards/brown/brown${brownCardsNum[clicksNum-1]}.png`;
-//     img.onload = () => {
-//         lastCard.style.backgroundImage = `url(${img.src})`;
-//     }
-//     console.log("brownCard: ",brownCardsNum[clicksNum-1]);
-// }
-// function firstDeckBlue() {
-//     const img = new Image();
-//         img.src = `./assets/MythicCards/blue/blue${blueCardsNum[clicksNum-3]}.png`;
-//         img.onload = () => {
-//             lastCard.style.backgroundImage = `url(${img.src})`;
-//         }
-//         console.log("bluenCard: ",blueCardsNum[clicksNum-3]);
-// }
-
-// function secondDeckGreen() {
-//     const img = new Image();
-//         img.src = `./assets/MythicCards/green/green${greenCardsNum[clicksNum-5]}.png`;
-//         img.onload = () => {
-//             lastCard.style.backgroundImage = `url(${img.src})`;
-//         }
-//         console.log("greenCard: ",greenCardsNum[clicksNum-5]);
-// }
-
-// function secondDeckBrown() {
-//     const img = new Image();
-//         img.src = `./assets/MythicCards/brown/brown${brownCardsNum[clicksNum-4]}.png`;
-//         img.onload = () => {
-//             lastCard.style.backgroundImage = `url(${img.src})`;
-//         }
-//         console.log("brownCard: ",brownCardsNum[clicksNum-4]);
-// }
-
-// function thirdDeckGreen() {
-//     const img = new Image();
-//         img.src = `./assets/MythicCards/green/green${greenCardsNum[clicksNum-8]}.png`;
-//         img.onload = () => {
-//             lastCard.style.backgroundImage = `url(${img.src})`;
-//         }
-//         console.log("greenCard: ",greenCardsNum[clicksNum-8]);
-// }
-
-// function thirdDeckBrown() {
-//     const img = new Image();
-//         img.src = `./assets/MythicCards/brown/brown${brownCardsNum[clicksNum-8]}.png`;
-//         img.onload = () => {
-//             lastCard.style.backgroundImage = `url(${img.src})`;
-//         }
-//         console.log("brownCard: ",brownCardsNum[clicksNum-8]);
-// }
-
-
-                // Создаём колоды определённых цветов с рандомно выбранными картами //
-
-// let greenCardsNum = [];
-// let brownCardsNum = [];
-// let blueCardsNum = [];
-//     for (let i=1; i<5; i++) {
-//         let greenNum = getRandomNum(1,18).toString();
-//         greenCardsNum.push(greenNum);
-//     }
-//     for (let i=1; i<10; i++) {
-//         let brownNum = getRandomNum(1,21).toString();
-//         brownCardsNum.push(brownNum);
-//     }
-//     for (let i=1; i<3; i++) {
-//         let bluenNum = getRandomNum(1,12).toString();
-//         blueCardsNum.push(bluenNum);
-//     }
-
-
+                        // Создаём счётчик карт //
+function setScore() {
+    blueDot1.textContent = ancientsData[1].firstStage.blueCards;
+    brownDot1.textContent = ancientsData[1].firstStage.brownCards;
+    greenDot2.textContent = ancientsData[1].firstStage.greenCards;
+    blueDot2.textContent = ancientsData[1].secondStage.blueCards;
+    brownDot2.textContent = ancientsData[1].secondStage.brownCards;
+    greenDot2.textContent = ancientsData[1].secondStage.greenCards;
+    blueDot3.textContent = ancientsData[1].thirdStage.blueCards;
+    brownDot3.textContent = ancientsData[1].thirdStage.brownCards;
+    greenDot3.textContent = ancientsData[1].thirdStage.greenCards;
+}
 
 
