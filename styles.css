@@ -48,8 +48,7 @@ code {
 }
 
 .start-again {
-    text-align: center;
-    height: 12%;
+    height: 4%;
     margin: auto;
     color: #fff;
     border: 2px solid rgb(201, 15, 15);
@@ -58,6 +57,13 @@ code {
     box-sizing: border-box;
     cursor: pointer;
     background-color: rgba(102, 51, 153, 0.6);
+}
+
+.go-again {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .difficulty-container .difficulty {

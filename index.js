@@ -80,7 +80,7 @@ function deckClick() {
         else if (clicksNum > 4 && clicksNum < 9) {setDeckCard()}
         else if (clicksNum > 8 && clicksNum < 16) {setDeckCard()
         if (clicksNum === 15) {
-            startAgain.style.display = 'block';
+            startAgain.style.display = 'flex';
             difficulty.classList.add('hidden');
             ancients.classList.remove('active');}}
         else if (clicksNum > 15) {currState.style.display = 'none';deck.classList.add('hidden')}
