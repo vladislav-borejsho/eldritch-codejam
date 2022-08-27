@@ -78,8 +78,12 @@ function deckClick() {
         clicksNum += 1;
         if (clicksNum > 0 && clicksNum < 5) {setDeckCard()}
         else if (clicksNum > 4 && clicksNum < 9) {setDeckCard()}
-        else if (clicksNum > 8 && clicksNum < 16) {setDeckCard()}
-        else if (clicksNum > 15) {startAgain.style.display = 'block';currState.style.display = 'none';deck.classList.add('hidden'), difficulty.classList.add('hidden'), ancients.classList.remove('active')}
+        else if (clicksNum > 8 && clicksNum < 16) {setDeckCard()
+        if (clicksNum === 15) {
+            startAgain.style.display = 'block';
+            difficulty.classList.add('hidden');
+            ancients.classList.remove('active');}}
+        else if (clicksNum > 15) {currState.style.display = 'none';deck.classList.add('hidden')}
     })
 }
                 // Отбираем рандомно нужное количество карт по цветам //
